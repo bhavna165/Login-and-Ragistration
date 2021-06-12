@@ -1,14 +1,29 @@
 import React, { useState } from "react";
+import Button from '@material-ui/core/Button';
+import { lightBlue } from "@material-ui/core/colors";
+// import Ragistration from "./Ragistration"
 
 const Login = () => {
         // Take the Number at here
-        const [fullName, setFullName] = useState({
-        phoneNO:"",
-      });
-  
+    const [fullNo, setFullNo] = useState({phoneNO:"",});
+    const [otpField , setotpField] = useState("");
+
+
+    const getOtp = () =>{
+        console.log("Clicked");
+        setotpField(
+            <>
+            <input type="number" 
+              placeholder="Enter OTP"
+            />
+            </>
+          )
+        };
+
+
       const inputEvent = (event) => {
         const {value , name} = event.target;
-          setFullName((preValue) =>{
+          setFullNo((preValue) =>{
                 console.log(preValue);
                 return {
                     ...preValue,
@@ -19,9 +34,11 @@ const Login = () => {
     
               //    After taking input we use to store it
      const onSubmits = (event) =>{
-      event.preventDefault()
-      alert("form submitted");
+         event.preventDefault();
+
+         alert("form submitted");
       };
+
 
   return (
     <>
@@ -33,10 +50,15 @@ const Login = () => {
           placeholder="Enter your mobile number :"
           name="phoneNo"
           onChange={inputEvent}  
-          value={fullName.phoneNo}
+          value={fullNo.phoneNo}
+          minLength={10}
+          maxLength={12}
+          required
           />
         <br />
-        <button>Sign up</button>
+        {otpField}
+        <br />
+        <Button className="btn btn-light" onClick={getOtp} >Sign up</Button>
       </div>
       </form>
     </>
